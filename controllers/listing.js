@@ -101,3 +101,22 @@ module.exports.destroyListing = async (req, res) => {
   req.flash("success", "Listing Deleted!");
   res.redirect("/listings");
 };
+
+module.exports.filterByCategory = async (req, res) => {
+  const { category } = req.params;
+
+  try {
+    const listings = await Listing.find({ category });
+
+    if (listings.length === 0) {
+      req.flash("error", `No listings found in category "${category}"`);
+      return res.redirect("/listings");
+    }
+
+    res.render("./listings/index.ejs", { allListings: listings });
+  } catch (err) {
+    console.error("Error filtering category:", err);
+    req.flash("error", "Failed to filter by category");
+    res.redirect("/listings");
+  }
+};

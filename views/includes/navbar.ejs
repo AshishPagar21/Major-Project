@@ -1,67 +1,129 @@
 <style>
+  /* Search Button */
   .btn-search {
-    background-color: #fe424d;
+    background-color: #3edbb9;
     color: white;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0.4rem 1rem;
+    transition: 0.3s;
   }
 
   .btn-search:hover {
-    background-color: #fe424d;
+    background-color: #3edbb9;
     color: white;
   }
 
   .btn-search i {
-    display: inline;
     margin-right: 0.5rem;
   }
 
+  /* Search Input */
   .search-inp {
     border-radius: 25px;
     font-size: 1rem;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 1.5rem;
+    transition: 0.3s;
+  }
+
+  .search-inp:focus {
+    box-shadow: 0 0 5px rgba(66, 254, 210, 0.7);
+    border-color: #3edbb9;
+  }
+
+  /* Navbar Links */
+  .navbar-nav .nav-link {
+    margin: 0.5rem 0;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #3edbb9;
+  }
+
+  /* Brand Icon */
+  .navbar-brand i {
+    font-size: 2.3rem;
+    color: #3edbb9;
+  }
+
+  /* Add some spacing between search and user links */
+  .navbar-nav.ms-auto + .navbar-nav.ms-auto {
+    margin-left: 1rem;
+  }
+
+  /* Make mobile dropdown background solid */
+  .navbar-collapse {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-collapse {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
   }
 </style>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav
+  class="navbar navbar-expand-md navbar-light bg-light border-bottom sticky-top shadow-sm"
+>
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"
-      ><i class="fa-regular fa-compass"></i
-    ></a>
+    <!-- Brand -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+    </a>
 
+    <!-- Toggler -->
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <i class="fa-solid fa-bars"></i>
     </button>
 
+    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
 
+      <!-- Search Form -->
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
+        <form
+          class="d-flex"
+          role="search"
+          action="/listings/search"
+          method="GET"
+        >
           <input
             class="form-control me-2 search-inp"
             type="search"
             placeholder="Search Destination"
+            name="q"
+            required
           />
           <button class="btn btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
+            <i class="fa-solid fa-magnifying-glass"></i> Search
           </button>
         </form>
       </div>
 
+      <!-- User Links -->
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Add Property</a>
-        <% if(!currUser) {%>
+        <% if (!currUser) { %>
         <a class="nav-link" href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Login</b></a>
-        <% } %> <% if(currUser) {%>
+        <% } %> <% if (currUser) { %>
         <a class="nav-link" href="/logout"><b>Logout</b></a>
         <% } %>
       </div>

@@ -17,6 +17,7 @@
 
   .filter:hover {
     opacity: 1;
+    color: #3edbb9;
     cursor: pointer;
   }
 
@@ -38,45 +39,59 @@
 
 <div id="filters">
   <div class="d-flex flex-nowrap overflow-auto py-2 px-2">
-    <div class="filter">
-      <div><i class="fa-solid fa-fire"></i></div>
-      <p>Trending</p>
-    </div>
-    <div class="filter">
+    <div class="filter" data-category="Rooms">
       <div><i class="fa-solid fa-bed"></i></div>
       <p>Rooms</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Iconic Cities">
       <div><i class="fa-solid fa-city"></i></div>
       <p>Iconic Cities</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Mountains">
       <div><i class="fa-solid fa-mountain"></i></div>
       <p>Mountains</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Beach">
       <div><i class="fa-solid fa-umbrella-beach"></i></div>
       <p>Beach</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Arctic">
       <div><i class="fa-solid fa-snowflake"></i></div>
       <p>Arctic</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Farm">
       <div><i class="fa-solid fa-tractor"></i></div>
       <p>Farm</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Camping">
       <div><i class="fa-solid fa-campground"></i></div>
       <p>Camping</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Dome">
       <div><i class="fa-solid fa-igloo"></i></div>
       <p>Dome</p>
     </div>
-    <div class="filter">
+
+    <div class="filter" data-category="Boat">
       <div><i class="fa-solid fa-sailboat"></i></div>
       <p>Boat</p>
+    </div>
+
+    <div class="filter" data-category="Jungle">
+      <div><i class="fa-solid fa-tree"></i></div>
+      <p>Jungle</p>
+    </div>
+
+    <div class="filter" data-category="Lakeside">
+      <div><i class="fa-solid fa-water-ladder"></i></div>
+      <p>LakeSide</p>
     </div>
   </div>
 
@@ -105,7 +120,6 @@
         alt="listing_image"
         style="height: 20rem"
       />
-      <div class="card-img-overlay">abcd</div>
       <div class="card-body">
         <p class="card-text">
           <%= listing.title %> <br />
@@ -119,6 +133,15 @@
 </div>
 
 <script>
+  document.querySelectorAll(".filter").forEach((filter) => {
+    filter.addEventListener("click", () => {
+      const category = filter.dataset.category;
+      window.location.href = `/listings/category/${encodeURIComponent(
+        category
+      )}`;
+    });
+  });
+
   let taxSwitch = document.getElementById("switchCheckDefault");
   taxSwitch.addEventListener("click", () => {
     let taxInfo = document.getElementsByClassName("tax-info");
